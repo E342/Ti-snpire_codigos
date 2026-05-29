@@ -1,0 +1,58 @@
+Define trapecio(f,a,b,n)=
+Prgm
+:© ===============================
+:© Parametros:
+:© f=funcion a calcular la integral
+:© a=limite inferior de la integral
+:© b=limite superior de la integral
+:© n=numero de trapecios
+:© ===============================
+:Local h,xj,j,sum_fx,f0,fn,fx,gen_str,pos_str,val_str,tn,i_real
+:Disp "== MÉTODO DEL TRAPECIO =="
+:((b-a)/(n))→h
+:Disp "Paso h = ",h
+:
+:f|x=a→f0
+:f|x=b→fn
+:Disp "f(a) = f(",a,") = ",f0
+:Disp "f(b) = f(",b,") = ",fn
+:
+:"f(a)/2"→gen_str
+:"f("&string(a)&")/2"→pos_str
+:string(((f0)/(2)))→val_str
+:
+:0→sum_fx
+:For j,1,n-1
+:  a+j*h→xj
+:  f|x=xj→fx
+:  Disp "f(a + "&string(j)&"*h) = f("&string(xj)&") = ",fx
+:  gen_str&" + f(a + "&string(j)&"*h)"→gen_str
+:  pos_str&" + f("&string(xj)&")"→pos_str
+:  val_str&" + "&string(fx)→val_str
+:  sum_fx+fx→sum_fx
+:EndFor
+:
+:gen_str&" + f(b)/2"→gen_str
+:pos_str&" + f("&string(b)&")/2"→pos_str
+:val_str&" + "&string(((fn)/(2)))→val_str
+:
+:h*(((f0)/(2))+sum_fx+((fn)/(2)))→tn
+:
+:Disp ""
+:Disp "Expansión simbólica:"
+:Disp "Tn = h * ("&gen_str&")"
+:Disp ""
+:Disp "Con valores:"
+:Disp "Tn = "&string(h)&" * ("&pos_str&")"
+:Disp ""
+:Disp "Sustitución:"
+:Disp "Tn = "&string(h)&" * ("&val_str&")"
+:Disp ""
+:Disp "Resultado final:"
+:Disp "Tn = ",approx(tn)
+:∫(f,x,a,b)→i_real
+:tn-i_real→err_abs
+:Disp ""
+:Disp "Valor real de la integral:"
+:Disp "I = ∫(f,x,a,b) = ",approx(i_real)
+:EndPrgm
