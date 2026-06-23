@@ -47,10 +47,9 @@ Antiguo Cuscatlán, El Salvador \\
 \maketitle
 
 \begin{abstract}
-El trabajo experimental realizado sobre el Movimiento Armónico Simple (MAS), se enfocó en dos sistemas fundamentales: el masa-resorte y el péndulo simple. El estudio tuvo como objetivos principales examinar cómo el cambio en la masa influye en el período de oscilación de un resorte y determinar de forma experimental la aceleración de la gravedad local.
-La metodología se dividió en dos fases: primero, la determinación de la constante elástica ($k$) de un resorte mediante la Ley de Hooke para analizar la relación potencial entre la masa ($m$) y el período  ($T$). Segundo, se midieron los tiempos de oscilación de un péndulo simple variando su longitud ($L$) a ángulos pequeños ($\leq 5^{\circ}$). Los datos fueron procesados mediante regresiones lineales y gráficas de $T^2$ vs $L$ para obtener el valor de la gravedad ($g$).
-Los resultados obtenidos se validaros comparando la gravedad calculada con el valor de referencia de ($9.78~m/s^2$). Al evaluar los errores porcentuales, se verifició que fueran menores al 10% para confirmar la precisión del experimento. El análisis permitió concluir que los datos experimentales respaldan satisfactoriamente los modelos teóricos de oscilaciones estudiados. 
+Tirame datos
 \end{abstract}
+
 \vspace{0.5em}
 \begin{IEEEkeywords}
 Movimiento Armónico Simple, constante elástica, péndulo simple, gravedad, oscilaciones.
@@ -61,7 +60,7 @@ El surgimiento de la observación de la Tierra se remonta y está ligada al avan
 
 Años más tarde, en Estados Unidos se llevaron a cabo estudios sobre cómo los satélites en órbita terrestre podrían apoyar a la comunidad de pronóstico meteorológico para monitorar la Tierra; estos estudios permitieron que se concretarán proyectos para crear nuevos satélites que monitorearan la atmósfera. Es así como finalmente el primer TIROS (Television and Infrared Observation Satellite) fue lanzado y comenzó a operar en abril de 1960. El satélite era estabilizado por giro, lo que significaba que el sensor orientado a la Tierra solo observaba una parte limitada de la latitud terrestre. A su vez, la cámara fue diseñada para mostrar la capa de nubes de la Tierra como una especie de indicador de los sistemas meteorológicos sobre el planeta, es por eso que los primeros diseños de satélites estaban impulsados principalmente por consideraciones meteorológicas y la necesidad de mejorar los pronósticos \cite{emery2017}.
 
-Puesto que todas las imágenes del satélite TIROS eran analógicas, no se logró efectuar las correcciones de las distorsiones geométricas mediante métodos digitales, y el mapeo se realizaba superponiendo "cuadrículas deformadas" que se ajustaran mejor a la orientación de los rasgos globales. Es por eso que la visualización de estas primeras imágenes de televisión satelital se convirtieron en un método de descubrimiento, encontrando imágenes que mostraban diversos procesos atmosféricos importantes, y a su vez, llegaron a ser el estándar para estudiar las condiciones de nubes atmosféricas y poder deducir sus conexiones con patrones climáticos globales \cite{emery2017}.
+Puesto que todas las imágenes del satélite TIROS eran analógicas, no se logró efectuar las correcciones de las distorsiones geométricas mediante métodos digitales, y el mapeo se realizaba superponiendo cuadrículas deformadas que se ajustaran mejor a la orientación de los rasgos globales. Es por eso que la visualización de estas primeras imágenes de televisión satelital se convirtieron en un método de descubrimiento, encontrando imágenes que mostraban diversos procesos atmosféricos importantes, y a su vez, llegaron a ser el estándar para estudiar las condiciones de nubes atmosféricas y poder deducir sus conexiones con patrones climáticos globales \cite{emery2017}.
 
 Como mencionado anteriormente, habían muchas limitantes entorno a los métodos analógicos pero eso cambió con el lanzamiento del primer Sistema de Escáner Multiespectral (MSS) del Landsat, en 1972, que contenía 4 bandas espectrales de unos 100 nm de ancho cada una, un tamaño de píxel de 80 m, y además, proporcionaba datos de imagen satelital de propósito general directamente en formato digital. Con esto inició la era moderna de la teledetección terrestre desde el espacio, siendo los sistemas de teledetección actuales diversos y con un rango de prestaciones muy variados \cite{schowengerdt2006}. Con el inicio de la era moderna de la teledetección terrestre empezaron a surgir nuevas problemáticas. 
 
@@ -225,6 +224,7 @@ la resolución de la imagen, el tiempo de cómputo se multiplica por
 aproximadamente dieciséis. Por ello se dice que el cálculo directo es computacionalmente prohibitivo, el tiempo requerido se vuelve irrealizable (horas o días) incluso para imágenes de resolución media \cite{cooley1967}.
 
 \subsubsection{El algoritmo de Cooley-Tukey}
+\label{sec:cooley_tukey}
 
 La Transformada Rápida de Fourier (FFT) es un algoritmo que calcula los mismos coeficientes que la DFT, pero aprovechando la simetría y
 periodicidad de los factores exponenciales complejos $e^{-j2\pi kn/N}$ para
@@ -369,7 +369,7 @@ el presente trabajo.
 \end{figure}
 
 % ─────────────────────────────────────────
-\subsection{Transformada Inversa de Fourier Bidimensional (IFFT 2D)}
+\subsection{Transformada Inversa de Fourier Bidimensional (IDFT 2D)}
 
 Una vez aplicado el filtro en el dominio de frecuencias, la imagen filtrada se
 recupera en el dominio espacial mediante la Transformada Inversa de Fourier
@@ -468,205 +468,161 @@ de alta frecuencia. Esta distribución espectral hace de este tipo de imágenes 
 \input{resultados}
 
 
-\subsection{Parte II. Péndulo simple}
-\begin{table}[h!]
-\centering
-\caption{Datos para analizar la relación entre el período $T$ y la masa $M$ en el sistema masa-resorte [cite: 44].}
-\label{tab:pendulo_compacta}
-\resizebox{\columnwidth}{!}{% 
-\begin{tabular}{|c|c|c|c|c|c|c|c|}
-\hline
-\textbf{$m \pm \Delta m$} & \textbf{$t_{1}$} & \textbf{$t_{2}$} & \textbf{$t_{3}$} & \textbf{$t_{4}$} & \textbf{$t_{5}$} & \textbf{$t \pm \Delta t$} & \textbf{$T \pm \Delta T$}  \\ 
-\textbf{(g)} & \textbf{(s)} & \textbf{(s)} & \textbf{(s)} & \textbf{(s)} & \textbf{(s)} & \textbf{(s)} & \textbf{(s)}  \\ \hline
-550 $\pm$ 0.1 & 6.13 & 6.17 & 6.73  & 6.65 & 6.09 & 6.35 $\pm$ 0.1 & 1.27 $\pm$ 0.31 \\ \hline
-450 $\pm$ 0.1 & 6.13  & 6.15  & 5.79  & 5.90 & 5.73  & 5.94 $\pm$ 0.1  & 1.19 $\pm$ 0.19 \\ \hline
-350 $\pm$ 0.1 &  4.97 & 5.09  & 4.95  & 5.01  & 4.94  & 4.99 $\pm$ 0.1  & 1.00 $\pm$ 0.061  \\ \hline
-250 $\pm$ 0.1 & 4.40 & 4.32 & 4.07 & 4.17  & 4.45  & 4.28 $\pm$ 0.1 & 0.86 $\pm$ 0.16  \\ \hline
-150 $\pm$ 0.1 & 3.07  & 3.48  & 3.09  & 3.28  & 3.38  & 3.26 $\pm$ 0.1  & 0.65 $\pm$ 0.18 \\ \hline
-
-\end{tabular}
-}
-\end{table}
-
-La tabla II presenta datos experimentales primarios, obtenidos durante el procedimiento. Estos resultados númericos recopilados serán utilizados para el análisis cuantitativo de la relación del período $T$ y la masa $M$. Se espera validar el modelo del oscilador armónico simple. Cada fila de la tabla corresponde a un valor de masa controlado con cinco mediciones del tiempo en el que esta oscila cinco veces. Se calcula entonces, un promedio de tiempo y se toma en cuenta una incerteza de 0.1 segundos. En base a estas mediciones, se calcula el período $T$ y su incerteza $\Delta T$ (incerteza obtenida con el cálculo de desviación estándar con una muestra). Las mediciones del tiempo fueron repetidas con la intención de reducir el impacto que los errores aleatorios tendrían en los resultados y para la obtención de una estimación estadística de la incerteza del período. La comparación del período con su incerteza estadística ($\frac{\Delta T}{T}$) muestra una incerteza relativa que varía en un rango de 6\% y 28\% según distintos períodos calculados. La dispersión entre datos indica que la precisión en las mediciones fue no uniforme durante el procedimiento experimental. Se  considera que esto puede ser atribuido a errores dominantes no instrumentales relacionados con la intervención humana durante la medición con el cronómetro, dado que estos procedimientos pueden introducir más riesgo de error que otros experimentos (como la utilización de una balanza estable, por ejemplo). No se ha sobreestimado la precisión de los datos reportados, considerando las cifras de los instrumentos utilizados hasta las operaciones realizadas a partir de los datos primarios.
-
-
-Los hallazgos del procedimiento sugieren que el período aumenta con el incremento de la masa en el sistema. Lo evidenciado, entonces, concuerda cualitativamente con el modelo teórico conocido-propuesto. Inicialmente no se señalan comportamientos anómalos o datos atípicos en los resultados cuantitativos obtenidos en la tabla. Lo evidenciado en la tabla II permite analizar la dependencia.
-
-
-\begin{table}[h!]
-\centering
-\caption{Datos para analizar la relación entre el período $T$ y la longitud $L$ en el péndulo simple[cite: 44].}
-\label{tab:pendulo_compacta}
-\resizebox{\columnwidth}{!}{% 
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
-\hline
-\textbf{$L \pm \Delta L$} & \textbf{$t_{1}$} & \textbf{$t_{2}$} & \textbf{$t_{3}$} & \textbf{$t_{4}$} & \textbf{$t_{5}$} & \textbf{$t \pm \Delta t$} & \textbf{$T \pm \Delta T$} & \textbf{$T^{2} \pm \Delta T^{2}$} \\ 
-\textbf{(m)} & \textbf{(s)} & \textbf{(s)} & \textbf{(s)} & \textbf{(s)} & \textbf{(s)} & \textbf{(s)} & \textbf{(s)} & \textbf{(s$^2$)} \\ \hline
-1.000 $\pm$ 0.001 & 10.05 & 10.12 & 9.98  & 10.03 & 10.07 & 10.05 $\pm$ 0.05 & 2.01 $\pm$ 0.01 & 4.04 $\pm$ 0.04 \\ \hline
-0.900 $\pm$ 0.001 & 9.52  & 9.48  & 9.55  & 9.60  & 9.50  & 9.53 $\pm$ 0.04  & 1.91 $\pm$ 0.01 & 3.65 $\pm$ 0.04 \\ \hline
-0.800 $\pm$ 0.001 & 8.95  & 9.02  & 8.88  & 8.92  & 8.98  & 8.95 $\pm$ 0.05  & 1.79 $\pm$ 0.01 & 3.20 $\pm$ 0.04 \\ \hline
-0.700 $\pm$ 0.001 & 8.35  & 8.42  & 8.30  & 8.45  & 8.38  & 8.38 $\pm$ 0.06  & 1.68 $\pm$ 0.01 & 2.82 $\pm$ 0.03 \\ \hline
-0.600 $\pm$ 0.001 & 7.75  & 7.80  & 7.72  & 7.85  & 7.78  & 7.78 $\pm$ 0.05  & 1.56 $\pm$ 0.01 & 2.43 $\pm$ 0.03 \\ \hline
-0.500 $\pm$ 0.001 & 7.08  & 7.15  & 7.02  & 7.10  & 7.12  & 7.09 $\pm$ 0.05  & 1.42 $\pm$ 0.01 & 2.02 $\pm$ 0.03 \\ \hline
-0.400 $\pm$ 0.001 & 6.32  & 6.38  & 6.28  & 6.35  & 6.30  & 6.33 $\pm$ 0.04  & 1.27 $\pm$ 0.01 & 1.61 $\pm$ 0.02 \\ \hline
-\end{tabular}
-}
-\end{table}
-
 \section{Conclusiones y Limitantes}
 
 \subsection{Síntesis del trabajo realizado}
 
 La Transformada
-Rápida de Fourier constituye una herramienta eficaz para extraer información
+Rápida de Fourier representa una herramienta eficaz para extraer información
 estructural de imágenes satelitales que, de otro modo, permanece implícita en
 el dominio espacial. A partir de una imagen del canal 7 del instrumento ABI a
-bordo del satélite GOES-East, se logró transformar la información de
-intensidad al dominio de frecuencias, diseñar e implementar un filtro
-pasa-altas ideal sobre dicho espectro, reconstruir la imagen mediante la
+bordo del satélite GOES-East, se transformó la información de intensidad al dominio de frecuencias, diseñar e implementar un filtro
+pasa-altas adecuado al espectro, reconstruir la imagen mediante la
 transformada inversa, y cuantificar el efecto del filtrado mediante el Teorema
-de Parseval. El resultado fue una imagen donde las regiones homogéneas de
-fondo —características de superficies oceánicas y terrestres extensas— quedan
-suprimidas, mientras que los bordes de formaciones nubosas, líneas de costa y
-otras discontinuidades de intensidad emergen con mayor definición. Esto
-confirma, en un caso de estudio concreto, la correspondencia teórica discutida
-en el Marco Teórico entre frecuencias bajas y regiones de variación lenta, y
+de Parseval. Resultando en una imagen donde las regiones homogéneas de fondo (características de superficies oceánicas y terrestres extensas) se
+suprimen; mientras que los bordes de formaciones nubosas, líneas de costa y
+otras discontinuidades de intensidad, subresalen con mayor definición. confirmando la correspondencia teórica entre frecuencias bajas y regiones de variación lenta, y
 entre frecuencias altas y cambios abruptos de intensidad.
+
+Además del análisis exploratorio se extendió el alcance del proyecto mediante el desarrollo de una
+aplicación web interactiva, generalizando el procedimiento a cualquier imagen
+proporcionada por el usuario, ya sea cargada como archivo o referenciada
+mediante una URL. Se implementó siguiendo dos rutas de
+procesamiento independientes y funcionalmente equivalentes. Una que ejecuta
+el cálculo en un servidor, reutilizando el mismo flujo de transformación empleado en el notebook, y otra que ejecuta el algoritmo de manera
+íntegra dentro del navegador del usuario, sin depender de ningún
+procesamiento remoto. Esta doble implementación, pasa de un análisis fijo sobre una sola
+imagen de referencia a una herramienta de uso general capaz de procesar cualquier imagen satelital, o incluso fotografías, en tiempo real.
+
+\subsection{Implementación manual del algoritmo FFT}
+
+La versión del laboratorio que se ejecuta en el navegador,
+implementa el algoritmo de Cooley-Tukey desde cero, incluyendo el reordenamiento de bits (bit-reversal) y las operaciones de mariposa descritas en la Sección~\ref{sec:cooley_tukey} del Marco Teórico. Esta
+implementación valida experimentalmente que la complejidad 
+$\mathcal{O}(N\log N)$ se traduce en un procesamiento
+fluido y eficiente, incluso al ejecutarse directamente en el navegador, sin la necesidad de un servidor o de librerías numéricas externas.
 
 \subsection{Aportes del enfoque implementado}
 
 Uno de los aportes más relevantes del proyecto fue la incorporación del
 análisis energético basado en el Teorema de Parseval como complemento
-cuantitativo al filtrado. Mientras que la inspección visual de la imagen
-filtrada permite apreciar cualitativamente qué estructuras se resaltan, el
+cuantitativo al filtrado. Mientras que la inspección de la imagen
+filtrada permite apreciar cualitativamente qué estructuras resaltan; por su parte, el
 cálculo del porcentaje de energía conservada $\eta$ aporta una medida objetiva
-de cuánta información se descarta en el proceso. Esta dualidad —resultado
-visual y métrica numérica— enriquece la interpretación del experimento, ya que
-permite distinguir entre un filtrado conservador, que retiene la mayor parte
+de cuánta información se descarta en el proceso. Esta dualidad (resultado
+visual y métrica numérica) 
+facilita la interpretación y discernimiento entre un filtrado conservador, que retiene la mayor parte
 de la energía y solo atenúa marginalmente las frecuencias bajas, y un
-filtrado agresivo, que elimina una fracción sustancial de la energía total a
-cambio de un realce más marcado de los bordes.
+filtrado agresivo, que elimina significativamente la energía total a
+cambio de un realce más marcado en los bordes.
 
 Asimismo, la implementación de la animación que varía el radio de corte $R$
-de manera progresiva constituyó un aporte pedagógico importante del proyecto.
+de manera progresiva, se convirtió en una herramienta  pedagógica clave para el proyecto.
 En lugar de evaluar el efecto del filtro en un único punto de operación, la
 animación permite observar la transición continua entre la imagen original y
-una versión donde prácticamente toda la información de baja frecuencia ha sido
-eliminada. Esta visualización dinámica hace tangible un concepto que, en el
-Marco Teórico, se presenta de forma estática: la relación inversa entre el
-radio de corte y la energía conservada, así como el punto a partir del cual el
-filtrado comienza a degradar significativamente la interpretabilidad de la
+una versión donde la información de baja frecuencia ha
+sido eliminada en su mayoría. Esta visualización hace tangible la relación inversa entre el
+radio de corte y la energía conservada, así como el punto a partir del cual
+el filtrado comienza a degradar severamente la legibilidad de la
 imagen.
 
 \subsection{Ventajas observadas del filtro pasa-altas ideal}
 
-La elección del filtro pasa-altas ideal, frente a alternativas como el filtro
-Gaussiano discutido en la sección de Marco Teórico, presenta una ventaja
-práctica relevante para los fines de este proyecto: su definición mediante una
-máscara binaria simplifica tanto la implementación como la interpretación del
-parámetro de control. El radio de corte $R$ tiene un significado geométrico
-directo —el tamaño del disco de frecuencias eliminadas— que no requiere ajustar
-un parámetro adicional de forma (como sí ocurre con la desviación estándar
-$\sigma$ del filtro Gaussiano). Esta simplicidad resultó conveniente para el
-experimento de barrido de $R$, en el que se requería un único parámetro libre
-para generar la secuencia de imágenes filtradas.
+En comparación con alternativas como el filtro Gaussiano (analizado en la Sección~\ref{sec:ghpf}) el filtro pasa-altas ideal presenta una ventaja operativa práctica debido a su naturaleza binaria. simplifica tanto su implementación matemática como la interpretación de su variable de control. Dota al radio de corte $R$ un sentido geométrico intuitivo y estricto (el límite exacto de la zona de frecuencias eliminadas) que no requiere ajustar un parámetro adicional, como sí
+ocurre con la desviación estándar $\sigma$ del filtro Gaussiano. Esta
+simplicidad resultó conveniente para el experimento de barrido de $R$, en el que se requería un único parámetro libre para generar la secuencia de
+imágenes filtradas.
 
 \subsection{Limitantes técnicas y matemáticas}
 
-A pesar de los resultados obtenidos, el proyecto presenta limitantes que deben
-reconocerse con honestidad académica.
+A pesar de los resultados obtenidos, el proyecto presenta ciertas limitaciones técnicas que es necesario señalar:
 
-En primer lugar, la limitante más relevante desde el punto de vista teórico es
-la presencia del efecto de Gibbs (\textit{ringing}), discutido en la sección
-\ref{} del Marco Teórico. La discontinuidad abrupta de la máscara $H(u,v)$ en
-$D(u,v) = R$ introduce artefactos oscilatorios alrededor de los bordes en la
-imagen reconstruida, visibles como un patrón de anillos concéntricos. Este
-fenómeno, inherente a cualquier filtro ideal y no exclusivo de esta
-implementación, podría haberse mitigado adoptando un filtro con transición
-suave, como el filtro Gaussiano o un filtro Butterworth, a costa de perder la
-simplicidad conceptual del IHPF.
+Primeramente, la presencia del efecto de Gibbs (\textit{ringing}). Debido a que la máscara $H(u,v)$ introduce un corte abrupto en $D(u,v) = R$ se generan componentes oscilatorios alrededor de los bordes en la imagen reconstruida, visibles como un patrón de anillos
+concéntricos (Figura~\ref{fig:gibbs}). Este fenómeno, es inherente a la naturaleza de cualquier filtro ideal y no una deficiencia de esta implementacióninherente a cualquier; no obstante, su impacto visual podría haberse minimizado implementando aproximaciones de atenuación gradual, tales como el filtro Gaussiano o filtro Butterworth. Sacrificando a cambio la simplicidad conceptual del proyecto.
 
-En segundo lugar, el radio de corte $R$ se definió y se exploró de forma
-empírica (inicialmente fijado en $R = 30$ píxeles, y posteriormente recorrido
+Por consiguiente, la determinación del radio de corte $R$ se abordó desde una perspectiva empírica (inicialmente fijado en $R = 30$ píxeles, y posteriormente recorrido
 en un rango de $5$ a $150$ píxeles durante la animación), sin un criterio
 matemático formal que determine un valor óptimo en función del contenido
-espectral específico de cada imagen. Un valor de $R$ adecuado para resaltar
-los bordes de un sistema nuboso extenso podría no ser igualmente adecuado para
-una imagen con estructuras de menor escala espacial. Esta dependencia del
-parámetro respecto al contenido de la imagen constituye una limitante para la
-generalización del método a otros conjuntos de datos sin un proceso de
-calibración previo.
+espectral de cada imagen. Un valor de $R$ adecuado para resaltar
+los bordes de un sistema nuboso extenso podría no ser igualmente adecuado
+para una imagen con estructuras de menor escala espacial. Esta dependencia
+del parámetro respecto al contenido de la imagen constituye una limitante
+para la generalización del método hacia otros conjuntos de datos sin un proceso de calibración previo.
 
-En tercer lugar, la conversión de la imagen satelital original —que en su
-forma nativa codifica información radiométrica de un canal infrarrojo
-específico— a una escala de grises de 8 bits mediante los coeficientes de la
-Rec.~601 introduce una pérdida de información. Dicha recomendación fue
-diseñada originalmente para señales de video en el espectro visible (RGB), por
-lo que su aplicación a un canal infrarrojo de onda corta, como el canal 7 del
-instrumento ABI, no necesariamente preserva con fidelidad las relaciones
-físicas de temperatura de brillo originales de la imagen satelital. El
-análisis de Fourier desarrollado, por tanto, opera sobre una representación
-visual derivada de los datos, y no sobre el dato radiométrico original sin
-procesar.
+Por otra parte, la conversión de la imagen satelital originales de su formato nativo hacia una escala de grises de 8 bits mediante los coeficientes de la
+Rec.~601 induce una pérdida de información cuantitativa. Dicha recomendación fue
+diseñada originalmente para señales de video en el espectro visible (RGB), por lo que su aplicación sobre un canal de infrarrojo de onda corta del instrumento ABI no garantiza la preservación de las relaciones
+termodinámicas (temperatura de brillo). Por lo tanto, el análisis de Fourier desarrollado opera sobre una representación
+visual derivada de los datos y orientada al contraste, mas no sobre los datos radiométricos crudos extraídos del satélite.
 
-En cuarto lugar, el filtro implementado actúa exclusivamente sobre la
-componente de magnitud del espectro, dado que la máscara $H(u,v)$ se aplica de
-manera idéntica a la parte real e imaginaria del espectro complejo. Esto
-significa que, si bien el filtrado modifica qué frecuencias contribuyen a la
-imagen reconstruida, no se realizó en este proyecto un análisis independiente
-del comportamiento de la fase $\angle F(u,v)$, que también contiene
-información estructural relevante, particularmente sobre la posición relativa
-de los bordes. Una limitante metodológica del trabajo es, en consecuencia, no
-haber explorado el rol de la fase de manera separada a la magnitud.
+Adicionalmente, el filtro implementado actúa exclusivamente sobre la
+componente de magnitud del espectro, dado que la máscara $H(u,v)$ se aplica
+de manera idéntica a la parte real e imaginaria del espectro complejo. Esto
+significa que, si bien el proceso discrimina cuáles frecuencias contribuyen a la síntesis de la imagen reconstruida, no se realizó en este proyecto un análisis específico sobre el comportamiento de la fase $\angle F(u,v)$. Dado que esta componente codifica información estructural relevante, particularmente sobre la posición
+relativa de los bordes. por tanto, una limitación metodológica en el alcance del proyecto.
 
-Finalmente, conviene señalar que la implementación se restringió al filtro
-pasa-altas ideal con geometría circular, sin contrastar sus resultados frente
-a otras geometrías de máscara (por ejemplo, máscaras rectangulares o
+Finalmente, la implementación se restringió al filtro
+pasa-altas ideal con geometría circular, sin contrastar sus resultados frente a otras geometrías de máscara (por ejemplo, máscaras rectangulares o
 direccionales) que podrían resultar más adecuadas para resaltar estructuras
-con una orientación predominante, como frentes nubosos alineados o líneas de
-costa con una dirección preferente.
+con una orientación espacial predominante. Esta restricción impide optimizar el realce de características geofísicas lineales, tales como frentes nubosos alineados o discontinuidades costeras.
 
-\subsection{Trabajo futuro}
+\subsection{Limitantes de la implementación web}
 
-A partir de las limitantes identificadas, se desprenden varias líneas de
-mejora viables para una extensión futura de este trabajo. Una primera mejora
-consistiría en sustituir el filtro pasa-altas ideal por su contraparte
-Gaussiana o por un filtro Butterworth de orden ajustable, lo que permitiría
-cuantificar experimentalmente, mediante el mismo análisis de energía basado en
-el Teorema de Parseval, la reducción del efecto de Gibbs a cambio de una
+La extensión del proyecto hacia una aplicación web introdujo limitantes
+adicionales, condicionadas por las dos rutas de procesamiento desarrolladas. En el caso de la versión ejecutada en el navegador, el
+algoritmo de Cooley-Tukey corresponde a su variante de base 2, lo que exige estrictamente que las dimensiones de la imagen de entrada sean potencias de dos. Para satisfacer esta restricción, las imágenes cargadas se reescalan automáticamente a la potencia de dos más cercana (con un límite superior de 256×256 píxeles). Este proceso induce una pérdida de resolución que no ocurre en el cuaderno de Jupyter ni en la versión del servidor, donde la
+biblioteca numérica empleada admite transformadas sobre arreglos de
+cualquier tamaño mediante algoritmos de factorización general para cualquier dimensión de matriz
+\cite{numpyfft}. En consecuencia, los resultados obtenidos en el laboratorio
+del navegador impiden la comparación directa, debido a la asimetría en la resolución espacial, con los obtenidos en el cuaderno original.
+
+Asimismo, la posibilidad de procesar una imagen a partir de una URL externa
+está sujeta a las políticas de \textit{Cross-Origin Resource Sharing} (CORS)
+del servidor que aloja dicha imagen. Cuando el servidor de origen no autoriza explícitamente el acceso desde el dominio de la aplicación, el modelo de seguridad del navegador bloquea la lectura de los datos binarios del elemento, interrumpiendo el flujo de procesamiento independientemente de la validez del enlace. Esta limitante,
+inherente al modelo de seguridad de los navegadores y no al algoritmo de
+Fourier en sí, restringe en la práctica el conjunto de fuentes de imágenes que
+pueden analizarse.
+
+\subsection{Recomendaciones}
+ 
+A partir de las limitantes identificadas, se identifican ciertas líneas de
+mejora viables orientadas a robustecer el alcance de la investigación. En primer lugar, se propone sustituir el filtro pasa-altas ideal por aproximaciones Gaussianas o por un filtro Butterworth de orden ajustable, lo que permitiría
+cuantificar experimentalmente, mediante el mismo análisis de energía basado
+en el Teorema de Parseval, la mitigación del efecto de Gibbs a cambio de una
 transición más gradual entre frecuencias conservadas y eliminadas.
-
-Una segunda mejora sería el desarrollo de un criterio automático de selección
-del radio de corte $R$, basado, por ejemplo, en el porcentaje de energía que
+ 
+Asimismo, resulta factible el desarrollo de un criterio automático de selección
+del radio de corte $R$, fundamentado, por ejemplo, en el porcentaje de energía que
 se desea conservar ($\eta$ objetivo), de manera que el parámetro se ajuste de
-forma adaptativa al contenido espectral de cada imagen en lugar de fijarse de
-manera arbitraria.
-
-Una tercera línea de trabajo futuro consistiría en extender el análisis a
+forma adaptativa al contenido espectral de cada imagen.
+ 
+De igual modo, extender el análisis hacia
 series temporales de imágenes del mismo canal y la misma región geográfica,
 capturadas en distintos instantes, lo que permitiría observar la evolución
 del espectro de frecuencias asociada al desplazamiento de sistemas nubosos a
-lo largo del tiempo, conectando este proyecto con la aplicación de detección
-de estacionalidad en series de tiempo mencionada como alternativa en las
-indicaciones del proyecto.
-
-Por último, sería de interés incorporar al análisis la componente de fase del
-espectro de Fourier, actualmente fuera del alcance de este trabajo, con el
-fin de evaluar si la información posicional que ésta codifica aporta criterios
-adicionales para la detección de bordes geográficos, complementando así el
-análisis basado únicamente en la magnitud del espectro.
-
-\section*{Normas de Citación y Referencias}
-
-La plantilla numerará las citas de forma consecutiva entre corchetes [1]. La puntuación de la oración sigue al corchete [2]. Remítase simplemente al número de referencia, como en [3]—no utilice ``Ref. [3]'' ni ``referencia [3]'' excepto al principio de una oración: ``La referencia [3] fue la primera ...''.
-
-Numere las notas al pie por separado mediante superíndices. Coloque la nota al pie real en la parte inferior de la columna en la que fue citada. No incluya notas al pie en el resumen ni en la lista de referencias. Utilice letras para las notas al pie de las tablas.
-
-A menos que haya seis autores o más, indique los nombres de todos los autores; no utilice ``et al.''. Los artículos que no hayan sido publicados, incluso si han sido enviados para su publicación, deben citarse como ``inéditos'' [4]. Los artículos que hayan sido aceptados para su publicación deben citarse como ``en prensa'' [5]. Escriba con mayúscula solo la primera palabra del título de un artículo, excepto para nombres propios y símbolos de elementos.
+lo largo del tiempo, vinculando este proyecto con la aplicación de detección
+de estacionalidad y análisis de tendencias en series de tiempo.
+ 
+Por último, incorporar al análisis la componente de fase del espectro de Fourier, con el fin de evaluar si la información posicional que ésta codifica aporta
+criterios adicionales para la detección de bordes geográficos, complementando así el análisis basado únicamente en la magnitud del
+espectro.
+ 
+Respecto con la versión del laboratorio que se ejecuta en el navegador, se propone reemplazar la
+implementación del algoritmo de Cooley-Tukey por una variante de FFT
+de base mixta, capaz de operar sobre arreglos de cualquier dimensión sin
+requerir un reescalado previo a una potencia de dos. Posibilitando el procesamiento de imágenes a su resolución original y eliminando la actual pérdida de detalle por el redimensionado automático.
 
 
-\section{Referencias bibliográficas}
+% \section*{Normas de Citación y Referencias}
+
+%La plantilla numerará las citas de forma consecutiva entre corchetes [1]. La puntuación de la oración sigue al corchete [2]. Remítase simplemente al número de referencia, como en [3]—no utilice ``Ref. [3]'' ni ``referencia [3]'' excepto al principio de una oración: ``La referencia [3] fue la primera ...''.
+
+%Numere las notas al pie por separado mediante superíndices. Coloque la nota al pie real en la parte inferior de la columna en la que fue citada. No incluya notas al pie en el resumen ni en la lista de referencias. Utilice letras para las notas al pie de las tablas.
+
+%A menos que haya seis autores o más, indique los nombres de todos los autores; no utilice ``et al.''. Los artículos que no hayan sido publicados, incluso si han sido enviados para su publicación, deben citarse como ``inéditos'' [4]. Los artículos que hayan sido aceptados para su publicación deben citarse como ``en prensa'' [5]. Escriba con mayúscula solo la primera palabra del título de un artículo, excepto para nombres propios y símbolos de elementos.
+
+
+%\section{Referencias bibliográficas}
 
 \printbibliography[title={Referencias}]
 
