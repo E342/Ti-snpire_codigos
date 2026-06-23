@@ -13,6 +13,7 @@
 \usepackage[utf8]{inputenc} % Para que las tildes y ñ funcionen
 \usepackage[T1]{fontenc}    % Mejor codificación de fuente
 \usepackage[spanish]{babel}
+\usepackage{graphicx}
 \usepackage{float}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
@@ -47,12 +48,13 @@ Antiguo Cuscatlán, El Salvador \\
 \maketitle
 
 \begin{abstract}
-Tirame datos
+El presente proyecto describe la base teórica e implementación de un programa computacional para el procesamiento y análisis de imágenes satelitales utilizando la Transformada Rápida de Fourier (FFT) en dos dimensiones. El objetivo principal consiste en aislar y resaltar las características estructurales de alta frecuencia, tales como frentes nubosos y contornos geográficos, mediante la atenuación de las regiones de baja frecuencia. Para lograr esto, se aplicó un Filtro Pasa-Altas Ideal (IHPF) en el dominio de la frecuencia, evaluando la respuesta visual y numérica del sistema ante diferentes radios de corte. Adicionalmente, se incorporó un análisis cuantitativo fundamentado en el Teorema de Parseval para medir el porcentaje de energía espectral conservada y eliminada tras el filtrado. Los resultados obtenidos confirman la alta eficiencia de la FFT para el procesamiento digital de señales y validan la utilidad del método para extraer detalles topológicos, aunque también exponen las limitaciones de este tipo de filtro.
 \end{abstract}
 
 \vspace{0.5em}
 \begin{IEEEkeywords}
-Movimiento Armónico Simple, constante elástica, péndulo simple, gravedad, oscilaciones.
+La Transformada Discreta de Fourier Bidimensional
+(DFT 2D), Transformada Rápida de Fourier (FFT), Procesamiento de imágenes, Conversión escala grises, Filtro pasa-altas, Dominio de la frecuencia, Teorema de Parseval, Efecto de Gibbs, Google Colaboratory, Python
 \end{IEEEkeywords}
 
 \section{Introducción}
@@ -68,8 +70,7 @@ El concepto de una imagen puede definirse como una función bidimensional, f(x, 
 
 Una de las soluciones para la problemática mencionada anteriormente parte del Análisis Numérico, partiendo especificamente de Fourier. La solución que se plantea es examinar y purificar las señales digitales mediante su traslado al dominio de la frecuencia. A través de la Transformada Discreta de Fourier Bidimensional (DFT 2D), es posible descomponer la matriz espacial de la imagen satelital en sus componentes frecuenciales periódicas, aislando de forma selectiva el ruido y las texturas de alta frecuencia de las tendencias globales de baja frecuencia. Sin embargo, la computación directa de la DFT 2D presenta una complejidad algorítmica de $\mathcal{O}(M^2 N^2)$ para una imagen de dimensiones $M \times N$, siendo una carga aritmética que resulta restrictiva para los sistemas de procesamiento meteorológico en tiempo real \cite{gonzalez2018}. Es acá en donde entra la Transformada Rápida de Fourier (FFT), la cual es un algoritmo eficiente que es utilizado para calcular la DFT de una secuencia. Fue descrita por primera vez en el clásico artículo de Cooley y Tukey en 1965, siendo una idea originada del trabajo no publicado de Gauss en 1805. Puede ser descrito como un algoritmo de tipo ``divide y vencerás'' que descompone recursivamente la DFT en DFT más pequeñas para reducir el número de cálculos. Por lo que como resultado, logra reducir la complejidad de la DFT de \(O(n^2)\) a \(O(n \log n)\), siendo \(n\) el tamaño de los datos. Esta reducción en el tiempo de cálculo es significativa, particularmente para datos con un \(N\) grande, y por esta razón la FFT es eficiente para utilizar en imágenes satelitales \cite{kong2020python}.
 
-En base a las necesidades de procesamiento descritas y bajo el enfoque del Análisis Numérico, el presente proyecto tiene como objetivo el diseño, implementación y evaluación de una solución computacional especializada en el filtrado en frecuencia de imágenes satelitales., utilizando el lenguaje de programación Python y los módulos optimizados de la biblioteca \texttt{numpy.fft}, el equipo implementó un algoritmo basado en un Filtro Pasa-Altas Ideal (IHPF) para reducir las componentes de baja frecuencia asociadas a fondos homogéneos y resaltar las estructuras de alta frecuencia, tales como frentes nubosos y contornos geográficos. La solución se integró en una interfaz interactiva con \texttt{ipywidgets}, que permite variar el radio de corte y observar la respuesta del sistema en tiempo real. Asimismo, se implementó una animación de reconstrucción progresiva y un análisis cuantitativo mediante el Teorema de Parseval para evaluar la conservación de la energía espectral, contrastando la eficiencia del algoritmo con sus limitaciones inherentes, como el efecto de Gibbs.
-
+En base a las necesidades de procesamiento descritas y bajo el enfoque del Análisis Numérico, el presente proyecto tiene como objetivo el diseño, implementación y evaluación de una solución computacional especializada en el filtrado en frecuencia de imágenes satelitales, el equipo implementó un algoritmo basado en un Filtro Pasa-Altas Ideal (IHPF) para reducir las componentes de baja frecuencia asociadas a fondos homogéneos y resaltar las estructuras de alta frecuencia, tales como frentes nubosos y contornos geográficos. La solución se integró en una interfaz interactiva que permite variar el radio de corte y observar la respuesta del sistema en tiempo real. Asimismo, se implementó una animación de reconstrucción progresiva y un análisis cuantitativo mediante el Teorema de Parseval para evaluar la conservación de la energía espectral, contrastando la eficiencia del algoritmo con sus limitaciones inherentes, como el efecto de Gibbs.
 
 \section{Marco Teórico}
 
@@ -77,14 +78,6 @@ En base a las necesidades de procesamiento descritas y bajo el enfoque del Anál
 \input{definicionmatematica}
 
 \subsection{Representación Digital de Imágenes}
-
-Una imagen digital en escala de grises puede modelarse matemáticamente como una
-función discreta $I: \mathbb{Z}^2 \rightarrow \mathbb{Z}$, donde cada par de
-índices enteros $(x, y)$ identifica la posición de un píxel en una cuadrícula
-bidimensional de dimensiones $M \times N$, y el valor $I(x, y)$ representa la
-intensidad de luminancia en dicho punto \cite{gonzalez2018}. En imágenes de 8
-bits por canal, este valor pertenece al rango discreto $[0, 255]$, donde $0$
-corresponde al negro absoluto y $255$ al blanco.
 
 Una imagen a color no es una única función, sino la superposición de tres funciones independientes, cada una asociada a un canal de color; rojo, verde y azul (modelo RGB). En lugar de registrar un único valor de intensidad, cada píxel almacena tres valores distintos (uno para cada canal). La combinación de estos tres datos es lo que determina el color percibido en ese punto específico \cite{gonzalez2018}.
 
@@ -115,9 +108,7 @@ tratado en las secciones siguientes.
 % ─────────────────────────────────────────
 \subsection{La Transformada Discreta de Fourier Bidimensional (DFT 2D)}
 
-La Transformada Discreta de Fourier (DFT) es el instrumento central
-del presente trabajo. Antes de tratar las imágenes, presenta su la versión más simple de ellas. Es decir, transforma una secuencia finita de $N$ muestras $x[n]$, en un nuevo
-conjunto de $N$ coeficientes complejos $X[k]$, donde cada coeficiente está asociado a una frecuencia específica \cite{kulkarni, tan2020}:
+Dado que las computadoras operan exclusivamente con información discreta y finita, la herramienta fundamental para el procesamiento digital de señales es la Transformada Discreta de Fourier (DFT).La Transformada Discreta de Fourier (DFT) es el instrumento central del presente trabajo. Antes de tratar las imágenes, presenta su la versión más simple de ellas. Es decir, transforma una secuencia finita de $N$ muestras $x[n]$, en un nuevo conjunto de $N$ coeficientes complejos $X[k]$, donde cada coeficiente está asociado a una frecuencia específica \cite{kulkarni, tan2020}:
 
 \begin{equation}
     X[k] = \sum_{n=0}^{N-1} x[n]\, e^{-j2\pi kn/N}, \quad k = 0, 1, \ldots, N-1
@@ -144,6 +135,12 @@ respectivamente. El resultado $F(u, v)$ es una matriz de números complejos, de
 la misma dimensión que la imagen original. Cada valor $F(u,v)$ no corresponde a
 un solo píxel de la imagen original, sino que resume (mediante la suma de todos los píxeles $(x,y)$) qué tan presente está ese par particular de frecuencias $(u,v)$ en la imagen completa. En otras palabras, cada componente del espectro mide la fuerza con la que un patrón ondulatorio específico aparece repetido a lo largo de toda la imagen.
 
+De acuerdo al principio de expansión, el núcleo exponencial de esta transformación se fundamenta en la identidad de Euler \cite{castillo2018filtrado}:
+\begin{equation}
+e^{-i \theta} = \cos(\theta) - i\sin(\theta)
+\end{equation}
+lo que explica por qué el operador proyecta la intensidad real de los píxeles hacia un espacio de coeficientes complejos $\mathbb{C}^{M \times N}$, estructurados por una componente real $\operatorname{Re}(F(u,v))$ y una imaginaria $\operatorname{Im}(F(u,v))$ \cite{gonzalez2018}.
+
 \subsubsection{Espectro de Magnitud y Fase}
 
 Cada coeficiente $F(u, v)$ puede descomponerse en su parte real e imaginaria, o en su magnitud:
@@ -168,7 +165,7 @@ ubicadas en la periferia del espectro, codifican los cambios abruptos de
 intensidad, es decir, los bordes, contornos y texturas finas presentes en la imagen satelital \cite{gonzalez2018}. La Figura~\ref{fig:dft_spectrum} ilustra
 de forma esquemática esta relación entre una imagen y su espectro de magnitud.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
 \begin{subfigure}{0.46\textwidth}
         \centering
@@ -243,7 +240,7 @@ decir, la ganancia en velocidad es de aproximadamente cien veces
 \cite{cooley1967}. La
 Figura~\ref{fig:butterfly} ilustra el diagrama de mariposa característico de este algoritmo.
 
-\begin{figure}[H]
+\begin{figure}[htbp]
 \centering
 \includegraphics[width=0.3\textwidth]{images/Butterfly-FFT.png}
 \caption{Ejemplo ilustrativo de una imagen y su espectro de magnitud en el dominio de Fourier. Las componentes de baja frecuencia se concentran alrededor del centro del espectro, mientras que las altas frecuencias aparecen alejadas de éste. Adaptado de \cite{mathworks_fft}.}
@@ -291,14 +288,20 @@ Antes de aplicar la transformada inversa, es indispensable deshacer este reorden
 % ─────────────────────────────────────────
 \subsection{Filtrado en el Dominio de Frecuencias}
 
+El filtrado digital en el dominio de la frecuencia consiste en la modificación de los componentes espectrales de una imagen antes de restituirla al dominio espacial. Para una imagen digital de entrada $f(x,y)$ de dimensiones $P \times Q$ píxeles (generalmente expandida mediante técnicas de relleno o \textit{padding} para evitar artefactos de convolución circular), la ecuación fundamental de filtrado se define mediante la expresión \cite{gonzalez2018}:
+\begin{equation}
+g(x,y) = \operatorname{Real}\left\{ \mathcal{F}^{-1} [H(u,v) \cdot F(u,v)] \right\}
+\end{equation}
+
+donde $\mathcal{F}^{-1}$ representa el operador de la Transformada Discreta de Fourier Inversa (IDFT 2D), $F(u,v)$ es la DFT de la imagen original, $H(u,v)$ denota la función de transferencia del filtro, y $g(x,y)$ es la imagen resultante procesada en el espacio de coordenadas reales. El producto $G(u,v) = H(u,v) \cdot F(u,v)$ opera estrictamente mediante una multiplicación elemento por elemento (producto de Hadamard) sobre arreglos bidimensionales de tamaño uniforme \cite{gonzalez2018}.
+
 \subsubsection{Teorema de Convolución}
 
-El fundamento teórico que justifica el filtrado en el dominio de frecuencias es
-el \textit{teorema de convolución}. Este establece que la convolución de dos señales en el dominio espacial es equivalente a la multiplicación de sus
+El fundamento teórico que justifica este procedimiento es el \textit{teorema de convolución}. Este establece que la convolución de dos señales en el dominio espacial es equivalente a la multiplicación de sus
 transformadas de Fourier en el dominio de frecuencias \cite{oppenheim2010}:
 
 \begin{equation}
-    I(x,y) * h(x,y) \;\longleftrightarrow\; F(u,v) \cdot H(u,v)
+    I(x,yx) * h(x,y) \;\longleftrightarrow\; F(u,v) \cdot H(u,v)
     \label{eq:convolucion}
 \end{equation}
 
@@ -307,10 +310,11 @@ $\mathcal{O}(N^2 \log N)$ (enfoque adoptado en el proyecto) \cite{gonzalez2018}.
 
 \subsubsection{Filtro Pasa-Altas Ideal (IHPF)}
 
-Un filtro pasa-altas tiene por objetivo suprimir las componentes de baja frecuencia del espectro y conservar únicamente las de alta frecuencia. El filtro pasa-altas ideal (\textit{Ideal High-Pass Filter}, IHPF) se establece mediante una máscara binaria $H(u,v)$ basada en la \textit{distancia euclidiana}, es decir, la distancia en línea recta, medida entre cada punto del espectro $(u,v)$ y el centro del mismo $(u_0, v_0)$ \cite{gonzalez2018}:
+Un filtro pasa-altas tiene por objetivo suprimir las componentes de baja frecuencia del espectro y conservar únicamente las de alta frecuencia. En el Filtro Pasa-Altas Ideal (\textit{Ideal High-Pass Filter}, IHPF), las funciones de transferencia son simétricas respecto a su origen geométrico. Para cumplir con esta condición, el espectro $F(u,v)$ se centraliza computacionalmente desplazando el origen al centro de la matriz $\left(\frac{P}{2}, \frac{Q}{2}\right)$ \cite{gonzalez2018}.
 
+El comportamiento numérico del filtro está condicionado por la distancia euclidiana medida en línea recta desde cada componente de frecuencia $(u,v)$ hacia dicho centro espectral, expresada analíticamente como:
 \begin{equation}
-    D(u,v) = \sqrt{(u - u_0)^2 + (v - v_0)^2}
+    D(u,v) = \sqrt{\left(u - \frac{P}{2}\right)^2 + \left(v - \frac{Q}{2}\right)^2}
     \label{eq:distancia}
 \end{equation}
 
@@ -481,7 +485,7 @@ pasa-altas adecuado al espectro, reconstruir la imagen mediante la
 transformada inversa, y cuantificar el efecto del filtrado mediante el Teorema
 de Parseval. Resultando en una imagen donde las regiones homogéneas de fondo (características de superficies oceánicas y terrestres extensas) se
 suprimen; mientras que los bordes de formaciones nubosas, líneas de costa y
-otras discontinuidades de intensidad, subresalen con mayor definición. confirmando la correspondencia teórica entre frecuencias bajas y regiones de variación lenta, y
+otras discontinuidades de intensidad, subresalen con mayor definición, confirmando la correspondencia teórica entre frecuencias bajas y regiones de variación lenta, y
 entre frecuencias altas y cambios abruptos de intensidad.
 
 Además del análisis exploratorio se extendió el alcance del proyecto mediante el desarrollo de una
